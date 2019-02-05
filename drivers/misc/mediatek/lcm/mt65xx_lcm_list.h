@@ -15,7 +15,15 @@
 #define __MT65XX_LCM_LIST_H__
 
 #include <lcm_drv.h>
-
+//by nik-kst for x5
+extern LCM_DRIVER hct_otm1285a_dsi_vdo_hd_boe;
+extern LCM_DRIVER hct_ili9881_dsi_vdo_hd_cpt;
+extern LCM_DRIVER hct_hx8394f_dsi_vdo_hd_cmi;
+extern LCM_DRIVER hct_otm1282_dsi_vdo_hd_auo;
+extern LCM_DRIVER hct_rm68200_dsi_vdo_hd_cpt;
+extern LCM_DRIVER hct_nt35521s_dsi_vdo_hd_boe_50_xld;
+extern LCM_DRIVER hct_hx8394d_dsi_vdo_hd_cmi;
+//end nik-kst for x5
 extern LCM_DRIVER otm1282a_hd720_dsi_vdo_60hz_lcm_drv;
 extern LCM_DRIVER otm1282a_hd720_dsi_vdo_lcm_drv;
 extern LCM_DRIVER nt35595_fhd_dsi_cmd_truly_8163_lcm_drv;
@@ -271,9 +279,7 @@ extern LCM_DRIVER auo_wuxga_dsi_vdo_lcm_drv;
 extern LCM_DRIVER ili9806e_dsi_vdo_tcl_blu5039_drv;
 extern LCM_DRIVER otm8019a_dsi_vdo_boyi_t50m_drv;
 extern LCM_DRIVER ili9881c_hd_dsi_vdo_ilitek_nt50358_3lane_lcm_drv;
-extern LCM_DRIVER nt35521_hd720_dsi_vdo_rixin_lcm_drv;
-extern LCM_DRIVER nt35521_dsi_vdo_yushun_cmi_hd720_lcm_drv;
-extern LCM_DRIVER hx8394d_dsi_vdo_hlt_hsd_hd720_lcm_drv;
+extern LCM_DRIVER xc_rm68200_dsi_vdo_hd720_lcm_drv;
 #ifdef BUILD_LK
 extern void mdelay(unsigned long msec);
 #endif
