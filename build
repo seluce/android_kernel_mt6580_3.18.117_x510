@@ -151,7 +151,7 @@ function BUILD() {
         make x510_defconfig O=out/ &>> defconfig.log
 
         echo "${YLW} BUILDING KERNEL..."
-        make -j6 O=out/ &>> Kernel.log
+        make -j6 O=out/
 	COMPILED_DATE=$(date +"%Y-%m-%d-%H:%M:%S")
 }
 

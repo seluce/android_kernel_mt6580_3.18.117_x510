@@ -36,12 +36,14 @@
 
 #include "tpd.h"
 
-#include "gt9xx_config.h"
+#include "include/config_default/gt9xx_config.h"
 #include "include/tpd_gt9xx_common.h"
 #if !((defined(CONFIG_GTP_AUTO_UPDATE) && defined(CONFIG_GTP_HEADER_FW_UPDATE)) && !defined(CONFIG_GTP_COMPATIBLE_MODE))
-#include "gt9xx_firmware.h"
+#include "include/firmware_default/gt9xx_firmware.h"
 #endif
 #define GUP_FW_INFO
+#define GTP_MAX_WIDTH 720
+#define GTP_MAX_HEIGHT 1280
 #if defined(CONFIG_TPD_PROXIMITY)
 #include <linux/hwmsensor.h>
 #include <linux/hwmsen_dev.h>
@@ -1314,9 +1316,9 @@ static s32 gtp_init_panel(struct i2c_client *client)
 #endif
 
 #endif	/* GTP_CUSTOM_CFG */
-
 	check_sum = 0;
 	for (i = GTP_ADDR_LENGTH; i < cfg_len; i++)
+
 		check_sum += config[i];
 	config[cfg_len] = (~check_sum) + 1;
 
@@ -1330,10 +1332,11 @@ static s32 gtp_init_panel(struct i2c_client *client)
 #else				/* DRIVER NOT SEND CONFIG */
 	cfg_len = GTP_CONFIG_MAX_LENGTH;
 	ret = gtp_i2c_read(client, config, cfg_len + GTP_ADDR_LENGTH);
+
 	if (ret < 0) {
 		GTP_ERROR("Read Config Failed, Using DEFAULT Resolution & INT Trigger!");
-		abs_x_max = GTP_MAX_WIDTH;
-		abs_y_max = GTP_MAX_HEIGHT;
+		abs_x_max = GTP_MAX_WIDTH
+		abs_y_max = GTP_MAX_HEIGHT
 		int_type = GTP_INT_TRIGGER;
 	}
 #endif
@@ -2928,9 +2931,9 @@ Input:
 Output:
 		Executive outcomes.0--success,non-0--fail.
 *******************************************************/
+int ret = 0;
 static s8 gtp_enter_sleep(struct i2c_client *client)
 {
-	int ret = 0;
 
 #if defined(CONFIG_GTP_COMPATIBLE_MODE)
 	if (CHIP_TYPE_GT9F == gtp_chip_type) {

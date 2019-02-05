@@ -29,12 +29,12 @@
 /* Pre-defined definition */
 
 #define TPD_KEY_COUNT   3
-#define key_1           78,1340
-#define key_2           168,1340
-#define key_3           258,1340
+#define key_1           120,1340
+#define key_2           360,1340
+#define key_3           600,1340
 
 #define TPD_KEYS        {KEY_MENU, KEY_HOMEPAGE, KEY_BACK}
-#define TPD_KEYS_DIM    {{key_1,78,50},{key_2,78,50},{key_3,78,50}}
+#define TPD_KEYS_DIM    {{key_1,120,80},{key_2,120,80},{key_3,120,80}}
 
 #define TOUCH_FILTER 1
 #if TOUCH_FILTER
