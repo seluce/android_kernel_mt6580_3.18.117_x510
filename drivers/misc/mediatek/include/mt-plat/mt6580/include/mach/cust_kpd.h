@@ -62,7 +62,7 @@
 /* HW keycode [0 ~ 71] -> Linux keycode */
 #define KPD_INIT_KEYMAP()	\
 {	\
-	[1] = KEY_VOLUMEUP,		\
+	[9] = KEY_VOLUMEUP,		\
 	[0] = KEY_VOLUMEDOWN,		\
 }	 
 /*****************************************************************/
@@ -72,13 +72,13 @@
 
 #define KPD_PWRKEY_GPIO_DIN  0
 
-#define  KPD_DL_KEY1  1    /* KEY_VOLUMEUP */
+#define  KPD_DL_KEY1  9    /* KEY_VOLUMEUP */
 #define  KPD_DL_KEY2  0    /* KEY_VOLUMEDOWN */
 #define  KPD_DL_KEY3  8    /* KEY_POWER */
 /*****************************************************************/
 /*******************Uboot Customation***************************/
 /*****************************************************************/
-#define MT65XX_RECOVERY_KEY  1    /* KEY_VOLUMEUP */
+#define MT65XX_RECOVERY_KEY  9    /* KEY_VOLUMEUP */
 #define MT65XX_FACTORY_KEY  0    /* KEY_VOLUMEDOWN */
 /*****************************************************************/
 /*******************factory Customation***************************/
