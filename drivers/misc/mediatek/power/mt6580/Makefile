@@ -35,11 +35,15 @@ else
                             ifeq ($(CONFIG_MTK_BQ24158_SUPPORT),y)
                                 obj-$(CONFIG_MTK_SMART_BATTERY) += bq24158.o charging_hw_bq24158.o
                             else
-                                obj-$(CONFIG_MTK_SMART_BATTERY) += charging_hw_pmic.o
+                                 ifeq ($(CONFIG_MTK_NCP1851_SUPPORT),y)
+                                obj-$(CONFIG_MTK_SMART_BATTERY) += ncp1851.o charging_hw_ncp1851.o
+                                 else
+                                     obj-$(CONFIG_MTK_SMART_BATTERY) += charging_hw_pmic.o
+                               endif
                             endif
-                         endif
-                    endif
-               endif
-          endif
-     endif
+                       endif
+                  endif
+             endif
+        endif
+   endif
 endif

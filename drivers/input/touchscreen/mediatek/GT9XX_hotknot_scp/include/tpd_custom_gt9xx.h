@@ -38,7 +38,7 @@
 
 #define TOUCH_FILTER 1
 #if TOUCH_FILTER
-#define TPD_FILTER_PARA {1, 293}	/*{enable, pixel density} */
+#define TPD_FILTER_PARA {1, 127}	/*{enable, pixel density} */
 #endif
 /*
 struct goodix_ts_data
