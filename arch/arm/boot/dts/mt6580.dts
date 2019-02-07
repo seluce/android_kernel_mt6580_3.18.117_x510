@@ -64,7 +64,7 @@
 				reg = <0x11130000 0x10000/*MSDC1_BASE*/
 					0x10001e84 0x2>;/*FPGA PWR_GPIO,PWR_GPIO_EO*/
 				interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_LOW>;
-				cd-gpios = <&pio 7 0>;
+				cd-gpios = <&pio 3 0>;
 				status = "disabled";
 				/* peter check when rainier ccf ready
 				clocks = <&perisys PERI_MSDC30_1>;
@@ -773,25 +773,13 @@
 			#size-cells = <0>;
 		};
 
-		touch: touch {
+		touch: touch@0 {
 			compatible = "mediatek,mt6580-touch";
 			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
 		};
-
- 		touch_panel: touch_panel {
- 			compatible = "mediatek,mt6580-touch_panel";
-			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
- 		};
-
 		accdet: accdet {
 			compatible = "mediatek,mt6580-accdet";
 		};
-
-		bq24158:bq24158@6a {
-                status = "okay";
-                compatible = "bq24158";
-                reg = <0x6a>;
-            };
 
 		gse_1: gse_1 {
 			compatible = "mediatek, gse_1-eint";
@@ -913,7 +901,6 @@
 			audclk-gpio = <26 0>;
 			audmiso-gpio = <28 0>;
 			audmosi-gpio = <27 0>;
-			extspkamp-gpio = <15 0>;
 		};
 
 		mt_soc_ul1_PCM {
@@ -1275,9 +1262,6 @@
 			vcamd-supply = <&mt_pmic_vcamd_ldo_reg>;
 			vcamaf-supply = <&mt_pmic_vcamaf_ldo_reg>;
 			vcamio-supply = <&mt_pmic_vcamio_ldo_reg>;
-			vgp3-supply = <&mt_pmic_vgp3_ldo_reg>;
-			vcamd_main2-supply = <&mt_pmic_vgp3_ldo_reg>;
-			vcamd_sub-supply = <&mt_pmic_vgp3_ldo_reg>;
 
 		};
 		kd_camera_hw2:kd_camera_hw2@15008000 {

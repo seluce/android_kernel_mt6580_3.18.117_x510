@@ -20,7 +20,7 @@
 	atag,videolfb-islcmfound = <1>;
 	atag,videolfb-fps= <6000>;
 	atag,videolfb-vramSize= <0x01800000>;
-	atag,videolfb-lcmname= "nt35521_dsi_vdo_yushun_cmi_hd720 hx8394d_dsi_vdo_hlt_hsd_hd720";
+	atag,videolfb-lcmname= "nt35590_AUO";
 };
 
 &bus {
@@ -84,33 +84,34 @@
 
 &i2c2 {
 /* start sensor */
-	gsensor@18 {
+	gsensor@0e {
+		compatible = "mediatek,kxtj2_1009_new";
 		i2c_num = <2>;
-		i2c_addr = <0x18 0 0 0>;
-		direction = <7>;
+		i2c_addr = <0xe 0 0 0>;
+		direction = <0x0>;
 		power_id = <0xffff>;
 		power_vol = <0>;
 		firlen = <0>;
 		is_batch_supported = <0>;
 	};
 
-	alsps@60 {
-		compatible = "mediatek,cm36283";
+	alsps@49 {
+		compatible = "mediatek,epl2182";
 		pinctrl-names = "pin_default", "pin_cfg";
 		pinctrl-0 = <&alsps_intpin_default>;
 		pinctrl-1 = <&alsps_intpin_cfg>;
 		status = "okay";
 		/* customization */
 		i2c_num = <2>;
-		i2c_addr = <0x60 0 0 0>;
+		i2c_addr = <0x23 0 0 0>;
 		polling_mode_ps = <0>;
 		polling_mode_als = <1>;
 		power_id = <0xffff>;
 		power_vol = <0>;
-		als_level = <0 1 7 15 50 100 500 1000 2000 3000 6000 10000 14000 18000 20000>;
-		als_value = <1 1 40 90 160 225 260 320 640 1280 1280 2600 2600 2600 10240 10240>;
-		ps_threshold_high =  <31>;
-		ps_threshold_low =  <21>;
+		als_level = <0x0 0x148 0x35d 0x561 0xc35 0x1e29 0x1e57 0x314d 0x5a16 0x6f0e 0x81fa 0xb80c 0xe15e 0xe15e 0xffff>;
+		als_value = <0x0 0x85 0x130 0x1f6 0x3ec 0x7d5 0xbf2 0x138d 0x1f48 0x271a 0x2ee0 0x3e80 0x4e20 0x4e20 0x4e20 0x4e20>;
+		ps_threshold_high = <500>;
+		ps_threshold_low = <400>;
 		is_batch_supported_ps = <0>;
 		is_batch_supported_als = <0>;
 	};
@@ -152,7 +153,7 @@
 	register_setting = <&mmc1_register_setting_default>;
 	host_function = /bits/ 8 <MSDC_SD>;
 	cd_level = /bits/ 8 <MSDC_CD_HIGH>;
-	cd-gpios = <&pio 7 0>;
+	cd-gpios = <&pio 3 0>;
 	status = "okay";
 };
 
@@ -222,7 +223,7 @@
 	};
 	mmc1_pins_insert_cfg: mmc1_ins_cfg {
 		pins_insert {
-			pins = <PINMUX_GPIO7__FUNC_EINT7>;
+			pins = <PINMUX_GPIO3__FUNC_EINT3>;
 			input-schmitt-enable =<1>;
 			slew-rate = <0>;
 			bias-pull-up =<00>;
@@ -289,17 +290,27 @@
 		};
 	};
 	alsps_intpin_default: alspsdefaultcfg {
+	};
+	gyro_intpin_cfg: gyropincfg {
 	    pins_cmd_dat {
-			pins = <PINMUX_GPIO6__FUNC_EINT6>;
+			pins = <PINMUX_GPIO1__FUNC_GPIO1>;
 			slew-rate = <0>;
-			bias-pull-up = <00>;
+			bias-pull-down = <00>;
 		};
+	};
+	gyro_intpin_default: gyrodefaultcfg {
 	};
 };
 &alsps {
 	pinctrl-names = "pin_default", "pin_cfg";
 	pinctrl-0 = <&alsps_intpin_default>;
 	pinctrl-1 = <&alsps_intpin_cfg>;
+	status = "okay";
+};
+&gyro {
+	pinctrl-names = "pin_default", "pin_cfg";
+	pinctrl-0 = <&gyro_intpin_default>;
+	pinctrl-1 = <&gyro_intpin_cfg>;
 	status = "okay";
 };
 
@@ -400,13 +411,13 @@
 			"extamp-pullhigh", "extamp-pulllow",
 			"extamp2-pullhigh", "extamp2-pulllow";
 	pinctrl-0 = <&AUD_pins_default>;
- 	pinctrl-1 = <&AUD_pins_pmicclk_mode0>;
- 	pinctrl-2 = <&AUD_pins_pmicclk_mode1>;
+	pinctrl-1 = <&AUD_pins_pmicclk_mode0>;
+	pinctrl-2 = <&AUD_pins_pmicclk_mode1>;
 	pinctrl-3 = <&AUD_pins_extamp_high>;
 	pinctrl-4 = <&AUD_pins_extamp_low>;
 	pinctrl-5 = <&AUD_pins_extamp2_high>;
 	pinctrl-6 = <&AUD_pins_extamp2_low>;
- 	status = "okay";
+	status = "okay";
 };
 &pio {
 	AUD_pins_default: audiodefault {
@@ -433,24 +444,28 @@
 			pins = <PINMUX_GPIO27__FUNC_AUD_DAT_MOSI>;
 		};
 	};
+
 	AUD_pins_extamp_high:extampouthigh {
 
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO17__FUNC_GPIO17>;
+			pins = <PINMUX_GPIO4__FUNC_GPIO4>;
 			slew-rate = <1>;
 			output-high;
 		};
 	};
+
 	AUD_pins_extamp_low:extampoutlow {
 
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO17__FUNC_GPIO17>;
+			pins = <PINMUX_GPIO4__FUNC_GPIO4>;
 			slew-rate = <1>;
 			output-low;
 		};
 	};
+
 	AUD_pins_extamp2_high:extamp2outhigh {
 	};
+
 	AUD_pins_extamp2_low:extamp2outlow {
 	};
 };
@@ -632,6 +647,8 @@
 			pins = <PINMUX_GPIO75__FUNC_GPIO75>;
 		};
 	};
+
+
 };
 &kd_camera_hw1 {
 	pinctrl-names = "default", "cam0_rst0", "cam0_rst1", "cam0_pnd0", "cam0_pnd1",
@@ -662,6 +679,38 @@
 };
 /* CAMERA GPIO end */
 
+/* FLASHLIGHT GPIO standardization */
+&pio {
+        flashlight_pins_default: default {
+        };
+
+        flashlight_pins_hwen_high: hwen_high {
+            pins_cmd_dat {
+                        pins = <PINMUX_GPIO8__FUNC_GPIO8>;
+                        slew-rate = <1>;
+                        output-high;
+                };
+        };
+
+        flashlight_pins_hwen_low: hwen_low {
+            pins_cmd_dat {
+                        pins = <PINMUX_GPIO8__FUNC_GPIO8>;
+                        slew-rate = <1>;
+                        output-low;
+                };
+        };
+
+};
+&flashlight {
+        pinctrl-names = "default", "hwen_high", "hwen_low";
+        pinctrl-0 = <&flashlight_pins_default>;
+        pinctrl-1 = <&flashlight_pins_hwen_high>;
+        pinctrl-2 = <&flashlight_pins_hwen_low>;
+        status = "okay";
+
+};
+/* FLASHLIGHT GPIO end */
+
 /* CONSYS GPIO standardization */
 &pio {
 	consys_pins_default: consys_default {
@@ -671,7 +720,7 @@
 	gpslna_pins_init: gpslna@0 {
 
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO65__FUNC_GPIO65>;
+			pins = <PINMUX_GPIO3__FUNC_GPIO3>;
 			slew-rate = <0>;
 			bias-disable;
 			output-low;
@@ -681,7 +730,7 @@
 	gpslna_pins_oh: gpslna@1 {
 
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO65__FUNC_GPIO65>;
+			pins = <PINMUX_GPIO3__FUNC_GPIO3>;
 			slew-rate = <1>;
 			output-high;
 		};
@@ -690,7 +739,7 @@
 	gpslna_pins_ol: gpslna@2 {
 
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO65__FUNC_GPIO65>;
+			pins = <PINMUX_GPIO3__FUNC_GPIO3>;
 			slew-rate = <1>;
 			output-low;
 		};

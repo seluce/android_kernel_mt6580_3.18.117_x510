@@ -30,15 +30,15 @@
 
 #define TPD_KEY_COUNT   3
 #define key_1           120,1340
-#define key_2           360,1340
+#define key_2           480,1340
 #define key_3           600,1340
 
 #define TPD_KEYS        {KEY_MENU, KEY_HOMEPAGE, KEY_BACK}
 #define TPD_KEYS_DIM    {{key_1,120,80},{key_2,120,80},{key_3,120,80}}
 
-#define TOUCH_FILTER 1
+#define TOUCH_FILTER 0
 #if TOUCH_FILTER
-#define TPD_FILTER_PARA {1, 127}	/*{enable, pixel density} */
+#define TPD_FILTER_PARA {1, 124}	/*{enable, pixel density} */
 #endif
 /*
 struct goodix_ts_data
@@ -94,7 +94,7 @@ extern unsigned char gtp_default_FW_fl[];
 
 #define CONFIG_OF_TOUCH
 /***************************PART1:ON/OFF define*******************************/
-#define GTP_HAVE_TOUCH_KEY    0
+#define GTP_HAVE_TOUCH_KEY    1
 #define GTP_COMPATIBLE_MODE   1	/* compatible with GT9XXF*/
 #define GTP_ESD_PROTECT       0	/* esd protection with a cycle of 2 seconds*/
 /*#define GUP_USE_HEADER_FILE   0*/
@@ -147,7 +147,7 @@ extern void force_reset_guitar(void);
 /*STEP_4(optional):If this project have touch key,Set touch key config.*/
 #if GTP_HAVE_TOUCH_KEY
 #define GTP_KEY_TAB	 {KEY_MENU, KEY_HOME, KEY_BACK}
-#define GTP_KEY_MAP_ARRAY  {KEY_MENU, KEY_HOME, KEY_BACK, KEY_SEARCH}//////new
+#define GTP_KEY_MAP_ARRAY  {KEY_MENU, KEY_HOME, KEY_BACK}//////new
 
 #endif
 
