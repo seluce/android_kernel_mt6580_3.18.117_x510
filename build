@@ -25,12 +25,12 @@ source ~/.yuvraj.conf
 
 # Common Declarations
 
-declare -a BUILDER_NAME="Ibrahim Fathelbab"
-declare -a BUILDER_NICKNAME="ibrahim1973"
+declare -a BUILDER_NAME="Ferris Daehn"
+declare -a BUILDER_NICKNAME="seluce"
 declare -a COMPILED_KERNEL="out/arch/arm/boot/zImage-dtb"
 declare -a BUILDER_TG_NAME="akbon19"
-declare -a TESTER_TG_NAME="Pharaohs-Team"
-declare -a DEVICE_NAME="Infinix-x510"
+declare -a TESTER_TG_NAME="seluce"
+declare -a DEVICE_NAME="CUBOT_NOTE_S"
 declare -f TGFILE
 declare -f TGECHO
 REPO_NAME="$(basename `git rev-parse --show-toplevel`)"
@@ -94,24 +94,8 @@ function BANNER() {
 
         INFO
         echo "${BLINK_RED}
-  *       
-░▒█████████████   ░░░░░▒▒▒▓▓████████████████  
- *███        ██   ░░░░░▒▒▒▓▓████████████████
-  ███ *     *██   ░░░░░▒▒▒▓▓████████████████  
- *███    *   ██ *            ░▒▓█     *        
-  ███  *     ██     *  *     ░▒▓█ *     *  *   
-  ███       *██  *  *   *    ░▒▓█   * *        
-░▒█████████████/\     *      ░▒▓█     * *  *   
-  ███         /\/\   *  *    ░▒▓█   *          
-  ███  *     /\/\/\     *    ░▒▓█  *   *   *   
- *███     * /\/\/\/\  *      ░▒▓█     *        
- *███   *  /\/\/\/__\   *    ░▒▓█    *   *     
-  ▓▓▓   * /\/\/\/____\       ░▒▓█      *       
-  ▒▒▒ *  /\/\/\/______\      ░▒▓█  *   * *     
-  ▒▒▒   /\/\/\/________\     ░▒▓█              
-  ░░░  /\/\/\/__________\    ░▒▓█              
-  ░░░ /\/\/\/____________\   ░▒▓█              
-  ░░░/\/\/\/Pharaohs__Team\  ░▒▓█                        
+  
+  --- seluce-dev ---                         
 ${RST}
 "
 sleep 2
@@ -151,7 +135,7 @@ function BUILD() {
         make x510_defconfig O=out/ &>> defconfig.log
 
         echo "${YLW} BUILDING KERNEL..."
-        make -j6 O=out/ &>> Kernel.log
+        make -j6 O=out/
 	COMPILED_DATE=$(date +"%Y-%m-%d-%H:%M:%S")
 }
 
