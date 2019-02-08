@@ -1,17 +1,3 @@
-/*
-* Copyright (C) 2011-2014 MediaTek Inc.
-* 
-* This program is free software: you can redistribute it and/or modify it under the terms of the 
-* GNU General Public License version 2 as published by the Free Software Foundation.
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-* See the GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along with this program.
-* If not, see <http://www.gnu.org/licenses/>.
-*/
-
 /*****************************************************************************
 *
 * Filename:
@@ -315,6 +301,7 @@ extern void ncp1851_set_ctrl_vbat(kal_uint32 val);
 extern void ncp1851_set_ieoc(kal_uint32 val);
 
 extern void ncp1851_set_ichg(kal_uint32 val);
+extern kal_uint32  ncp1851_get_ichg(void);
 
 //CON16
 extern void ncp1851_set_iweak(kal_uint32 val);

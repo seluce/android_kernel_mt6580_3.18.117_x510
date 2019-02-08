@@ -1,17 +1,3 @@
-/*
-* Copyright (C) 2011-2014 MediaTek Inc.
-* 
-* This program is free software: you can redistribute it and/or modify it under the terms of the 
-* GNU General Public License version 2 as published by the Free Software Foundation.
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-* See the GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along with this program.
-* If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include <linux/interrupt.h>
 #include <linux/i2c.h>
 #include <linux/slab.h>
@@ -37,6 +23,9 @@
 #include <mach/mt_pm_ldo.h>
 
 #include "ncp1851.h"
+#include "cust_charging.h"
+#include <mach/charging.h>
+
 
 /**********************************************************
   *
@@ -49,6 +38,7 @@
 static struct i2c_client *new_client = NULL;
 static const struct i2c_device_id ncp1851_i2c_id[] = {{"ncp1851",0},{}};   
 
+kal_bool chargin_hw_init_done = KAL_FALSE;
 static int ncp1851_driver_probe(struct i2c_client *client, const struct i2c_device_id *id);
 
 static struct i2c_driver ncp1851_driver = {
@@ -486,6 +476,17 @@ void ncp1851_set_ichg(kal_uint32 val)
 								(kal_uint8)(CON15_ICHG_SHIFT)
 								);
 }
+kal_uint32  ncp1851_get_ichg(void)
+{
+    kal_uint32 ret=0;
+    kal_uint32 val=0;
+
+	ret = ncp1851_read_interface((kal_uint8)NCP1851_CON15, 
+									(kal_uint8*)&val, 
+									(kal_uint8)CON15_ICHG_MASK, 
+									(kal_uint8)CON15_ICHG_SHIFT);						    
+    return val;
+}
 
 //CON16
 void ncp1851_set_iweak(kal_uint32 val)
@@ -614,8 +615,6 @@ void ncp1851_read_register(int i)
     printk("[ncp1851_read_register] Reg[0x%X]=0x%X\n", i, ncp1851_reg[i]);
 }
 
-extern int g_pmic_init_for_ncp1851;
-
 static int ncp1851_driver_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
     int err=0;
@@ -628,11 +627,11 @@ static int ncp1851_driver_probe(struct i2c_client *client, const struct i2c_devi
     }
     memset(new_client, 0, sizeof(struct i2c_client));
 
-     new_client = client;
+    new_client = client;
+
+    chargin_hw_init_done = KAL_TRUE;
 
     //---------------------
-
-    g_pmic_init_for_ncp1851 = 1;
     
     return 0;
 
@@ -706,7 +705,6 @@ static struct platform_driver ncp1851_user_space_driver = {
     },
 };
 
-#define NCP1851_BUSNUM 6
 static struct i2c_board_info __initdata i2c_ncp1851 = { I2C_BOARD_INFO("ncp1851", (0x6c>>1))};
 
 static int __init ncp1851_init(void)
